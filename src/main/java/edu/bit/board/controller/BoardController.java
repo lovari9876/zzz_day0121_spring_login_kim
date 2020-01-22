@@ -1,4 +1,4 @@
-package edu.bit.board.controller;
+﻿package edu.bit.board.controller;
 
 import java.util.List;
 
@@ -17,7 +17,6 @@ import edu.bit.board.vo.BoardVO;
 import edu.bit.board.vo.UserVO;
 
 @Controller
-@RequestMapping("/board")
 public class BoardController {
 	
 	@Inject
@@ -26,8 +25,6 @@ public class BoardController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		System.out.println("list()");
-		
-		
 		
 		model.addAttribute("list", boardService.selectBoardList());
 		return "list";
@@ -101,14 +98,14 @@ public class BoardController {
 	}
 
 	@RequestMapping("/list2")
-	// Criteria Ŭ������ �⺻ �����ڿ�  list2.jsp�� forEach������ ���� ������
+	// Criteria 클래스의 기본 생성자와  list2.jsp의 forEach문에서 값을 가져옴
 	public String list2(HttpSession session, Criteria criteria, Model model) {
 		System.out.println("list2()");
 		
 		UserVO member = (UserVO) session.getAttribute("member");
 		
 		if(member==null) {
-			System.out.println("������� ����");
+			System.out.println("멤버세션 없음");
 			return "redirect:/";
 		}
 		PageMaker pageMaker = new PageMaker();

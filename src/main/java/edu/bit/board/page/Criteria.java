@@ -2,16 +2,16 @@ package edu.bit.board.page;
 
 public class Criteria {
 	
-	private int page; // º¸¿©ÁÙ ÆäÀÌÁö
-	private int perPageNum; // ÆäÀÌÁö´ç º¸¿©ÁÙ ±Û ¼ö
+	private int page; // ë³´ì—¬ì¤„ í˜ì´ì§€
+	private int perPageNum; // í˜ì´ì§€ë‹¹ ë³´ì—¬ì¤„ ê¸€ ìˆ˜
 	
-	private int startNum; // ½ÃÀÛ ¹øÈ£
-	private int endNum; // ³¡ ¹øÈ£
+	private int startNum; // ì‹œì‘ ë²ˆí˜¸
+	private int endNum; // ë ë²ˆí˜¸
 
 	  
-    public Criteria() { // ÃÖÃÊ default »ı¼ºÀÚ·Î ±âº» °´Ã¼ »ı¼º½Ã ÃÊ±â°ªÀ» ÁöÁ¤ÇÑ´Ù. (1ÆäÀÌÁö, 10°³¾¿)
-        this.page = 1;  // »ç¿ëÀÚ°¡ ¼¼ÆÃÇÏÁö ¾ÊÀ¸¸é ±âº» 1
-        this.perPageNum = 10; // ÆäÀÌÁö´ç ±âº» 10°³¾¿ Ãâ·ÂÇÏµµ·Ï ¼¼ÆÃ
+    public Criteria() { // ìµœì´ˆ default ìƒì„±ìë¡œ ê¸°ë³¸ ê°ì²´ ìƒì„±ì‹œ ì´ˆê¸°ê°’ì„ ì§€ì •í•œë‹¤. (1í˜ì´ì§€, 10ê°œì”©)
+        this.page = 1;  // ì‚¬ìš©ìê°€ ì„¸íŒ…í•˜ì§€ ì•Šìœ¼ë©´ ê¸°ë³¸ 1
+        this.perPageNum = 10; // í˜ì´ì§€ë‹¹ ê¸°ë³¸ 10ê°œì”© ì¶œë ¥í•˜ë„ë¡ ì„¸íŒ…
     }
 	
 	public int getStartNum() {
@@ -31,7 +31,7 @@ public class Criteria {
 	public int getEndNum() {
 		endNum  =  page * getPerPageNum();
 		//endNum  = getStartNum() + getPerPageNum();		
-		System.out.println("¿£µå¹øÈ£" + endNum);
+		System.out.println("ì—”ë“œë²ˆí˜¸" + endNum);
 		return endNum;
 	}
 
@@ -39,13 +39,13 @@ public class Criteria {
 		this.endNum = endNum;
 	}    
     
-    // limit ±¸¹®¿¡¼­ ½ÃÀÛ ºÎºĞ¿¡ ÇÊ¿äÇÑ °ªÀ» ¹İÈ¯(mybatis¿¡¼­ »ç¿ë)
+    // limit êµ¬ë¬¸ì—ì„œ ì‹œì‘ ë¶€ë¶„ì— í•„ìš”í•œ ê°’ì„ ë°˜í™˜(mybatisì—ì„œ ì‚¬ìš©)
     public int getPageStart(){
         return (this.page -1) * this.perPageNum;
-		// RowBounds ÀÇ ¸Å°³º¯¼öÀÇ °ªÀ» ¼³Á¤ÇÏ´Â ¸Ş¼Òµå
-		// RouwBounds ÀÇ start index´Â 0ºÎÅÍ ½ÃÀÛÇÏ¹Ç·Î
-		// 1ÆäÀÌÁö : 1-1 * 10 = 0 ->>
-		// 2ÆäÀÌÁö : 2-1 * 10 = 10 ->>
+		// RowBounds ì˜ ë§¤ê°œë³€ìˆ˜ì˜ ê°’ì„ ì„¤ì •í•˜ëŠ” ë©”ì†Œë“œ
+		// RouwBounds ì˜ start indexëŠ” 0ë¶€í„° ì‹œì‘í•˜ë¯€ë¡œ
+		// 1í˜ì´ì§€ : 1-1 * 10 = 0 ->>
+		// 2í˜ì´ì§€ : 2-1 * 10 = 10 ->>
     }     
  
     // getter setter
@@ -54,7 +54,7 @@ public class Criteria {
     }
     public void setPage(int page) {
         if ( page <= 0 ){
-            // ÆäÀÌÁö´Â 1ÆäÀÌÁöºÎÅÍÀÓÀ¸·Î 0º¸´Ù ÀÛ°Å³ª °°Àº°ªÀÏ °æ¿ì ¹«Á¶°Ç Ã¹¹øÂ° ÆäÀÌÁö·Î ¼³Á¤µÇµµ·Ï ÇØÁØ´Ù.
+            // í˜ì´ì§€ëŠ” 1í˜ì´ì§€ë¶€í„°ì„ìœ¼ë¡œ 0ë³´ë‹¤ ì‘ê±°ë‚˜ ê°™ì€ê°’ì¼ ê²½ìš° ë¬´ì¡°ê±´ ì²«ë²ˆì§¸ í˜ì´ì§€ë¡œ ì„¤ì •ë˜ë„ë¡ í•´ì¤€ë‹¤.
             this.page = 1;
         }else{
             this.page = page;

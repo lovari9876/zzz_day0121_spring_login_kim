@@ -4,28 +4,28 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageMaker {
-	private Criteria cri; // page, perPageNum À» °¡Áö°í ÀÖÀ½
+	private Criteria cri; // page, perPageNum ì„ ê°€ì§€ê³  ìžˆìŒ
 	 
-    private int totalCount; // ÀüÃ¼ °Ô½Ã±Û ¼ö
+    private int totalCount; // ì „ì²´ ê²Œì‹œê¸€ ìˆ˜
 
-    //[11][12][13].......[20] : ÇöÁ¦ ÆäÀÌÁö°¡ 13ÀÏ ¶§ startPage´Â 11, endPage´Â 20
-    private int startPage; // °Ô½Ã±Û ¹øÈ£¿¡ µû¸¥ (º¸¿©Áö´Â)ÆäÀÌÁöÀÇ ½ÃÀÛ ¹øÈ£
-    private int endPage; // °Ô½Ã±Û ¹øÈ£¿¡ µû¸¥ (º¸¿©Áö´Â)ÆäÀÌÁöÀÇ ¸¶Áö¸· ¹øÈ£
+    //[11][12][13].......[20] : í˜„ì œ íŽ˜ì´ì§€ê°€ 13ì¼ ë•Œ startPageëŠ” 11, endPageëŠ” 20
+    private int startPage; // ê²Œì‹œê¸€ ë²ˆí˜¸ì— ë”°ë¥¸ (ë³´ì—¬ì§€ëŠ”)íŽ˜ì´ì§€ì˜ ì‹œìž‘ ë²ˆí˜¸
+    private int endPage; // ê²Œì‹œê¸€ ë²ˆí˜¸ì— ë”°ë¥¸ (ë³´ì—¬ì§€ëŠ”)íŽ˜ì´ì§€ì˜ ë§ˆì§€ë§‰ ë²ˆí˜¸
     
-    private boolean prev; // ÀÌÀü ¹öÆ°À» ´©¸¦ ¼ö ÀÖ´Â °æ¿ì/¾ø´Â °æ¿ì ºÐ·ù¸¦ À§ÇÔ
+    private boolean prev; // ì´ì „ ë²„íŠ¼ì„ ëˆ„ë¥¼ ìˆ˜ ìžˆëŠ” ê²½ìš°/ì—†ëŠ” ê²½ìš° ë¶„ë¥˜ë¥¼ ìœ„í•¨
     private boolean next;
  
-    private int displayPageNum = 10; // È­¸é ÇÏ´Ü¿¡ º¸¿©Áö´Â ÆäÀÌÁöÀÇ °³¼ö
+    private int displayPageNum = 10; // í™”ë©´ í•˜ë‹¨ì— ë³´ì—¬ì§€ëŠ” íŽ˜ì´ì§€ì˜ ê°œìˆ˜
     private int tempEndPage;
  
     ///////////////////////////////////////////////////////////////////////////////////////////////
     public void setTotalCount(int totalCount) {
         this.totalCount = totalCount;
  
-        calcData(); // ÀüÃ¼ ÇÊµå º¯¼öµé ¼¼ÆÃ : ÀüÃ¼ °Ô½Ã±Û ¼öÀÇ setter°¡ È£ÃâµÉ ¶§ ÀüÃ¼ ¼¼ÆÃµÇµµ·Ï ÇÔ
+        calcData(); // ì „ì²´ í•„ë“œ ë³€ìˆ˜ë“¤ ì„¸íŒ… : ì „ì²´ ê²Œì‹œê¸€ ìˆ˜ì˜ setterê°€ í˜¸ì¶œë  ë•Œ ì „ì²´ ì„¸íŒ…ë˜ë„ë¡ í•¨
     }
  
-    private void calcData() { // ÀüÃ¼ ÇÊµå º¯¼ö °ªµéÀ» °è»êÇÏ´Â ¸Þ¼­µå
+    private void calcData() { // ì „ì²´ í•„ë“œ ë³€ìˆ˜ ê°’ë“¤ì„ ê³„ì‚°í•˜ëŠ” ë©”ì„œë“œ
  
         endPage = (int) (Math.ceil(cri.getPage() / (double) displayPageNum) * displayPageNum);
  
@@ -38,7 +38,7 @@ public class PageMaker {
             endPage = tempEndPage;
         }
  
-        prev = startPage == 1 ? false : true; // 1ÆäÀÌÁö¸é ÀÌÀü ´©¸¦ ¼ö ¾ø°Ô false
+        prev = startPage == 1 ? false : true; // 1íŽ˜ì´ì§€ë©´ ì´ì „ ëˆ„ë¥¼ ìˆ˜ ì—†ê²Œ false
         next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
  
     }

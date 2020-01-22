@@ -1,4 +1,4 @@
-package edu.bit.board.controller;
+﻿package edu.bit.board.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +32,7 @@ public class LoginController {
 		UserVO login = loginService.loginUser(id, pw);
 		
 		if(login==null) {
-			//RedirectAttributes ���ΰ�ħ�ϸ� ���󰡴� ������(1ȸ��)
+			//RedirectAttributes 새로고침하면 날라가는 데이터(1회성)
 			rttr.addFlashAttribute("msg",false);
 		} else {
 			session.setAttribute("member", login);
@@ -41,14 +41,23 @@ public class LoginController {
 		return "redirect:/";
 	}
 	
-	// 로그아웃
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) { 
-		// 원래 세션은 request안에 있으나, 스프링은 HttpSession 지원함
-		
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)
+	public String logout(HttpServletRequest req, RedirectAttributes rttr) {
 		System.out.println("login()");
 		
-		session.invalidate();
+		HttpSession session = req.getSession();
+		
+		String id = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		
+		UserVO login = loginService.loginUser(id, pw);
+		
+		if(login==null) {
+			//RedirectAttributes 새로고침하면 날라가는 데이터(1회성)
+			rttr.addFlashAttribute("msg",false);
+		} else {
+			session.setAttribute("member", login);
+		}
 		
 		return "redirect:/";
 	}

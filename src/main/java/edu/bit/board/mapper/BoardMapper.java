@@ -42,7 +42,7 @@ public interface BoardMapper {
 	@Delete("delete from mvc_board where bId = #{bId}")
 	public void deleteBoard(@Param("bId") String strbId);
 
-	// xml¿¡ ¼¼ÆÃ
+	// xmlì— ì„¸íŒ…
 	public List<BoardVO> selectBoardListPage(Criteria criteria);
 	
 	
